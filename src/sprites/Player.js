@@ -2,7 +2,7 @@ import Phaser from 'phaser'
 
 import Jet from './Jet'
 
-export default class extends Jet {
+export default class Player extends Jet {
   constructor (props) {
     super(props)
     this.cursors = this.game.input.keyboard.createCursorKeys()
@@ -37,11 +37,9 @@ export default class extends Jet {
     super.update()
   }
 
-
   spaceKeyDown () {
     this.speed = this.fastSpeed
   }
-
 
   spaceKeyUp () {
     this.speed = this.slowSpeed
