@@ -1,4 +1,4 @@
-import { Sprite } from 'phaser'
+import Phaser, { Sprite } from 'phaser'
 
 export default class Jet extends Sprite {
   constructor ({ game, x, y, asset }) {
@@ -12,7 +12,12 @@ export default class Jet extends Sprite {
     this.anchor.setTo(0.5)
     this.onDestroyedCallbacks = []
     this.onDestroyedContexts = []
-    // game.physics.enable(this, Phaser.Physics.ARCADE)
+
+    this.slowSpeed = 150
+    this.fastSpeed = 250
+    this.speed = this.slowSpeed
+    this.rotationSpeed = 40
+    game.physics.enable(this, Phaser.Physics.P2JS)
   }
 
   addDestroyedCallbacks (callback, context) {
@@ -25,6 +30,6 @@ export default class Jet extends Sprite {
   }
 
   update () {
-    this.angle += 2
+    this.body.moveForward(this.speed)
   }
 }
