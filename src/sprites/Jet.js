@@ -4,8 +4,8 @@ export default class Jet extends Sprite {
   constructor ({ game, x, y, asset }) {
     super(game, x, y, asset)
 
-    this.game = game
     this.asset = asset
+    this.game = game
     this.x = x
     this.y = y
 
@@ -13,11 +13,14 @@ export default class Jet extends Sprite {
     this.onDestroyedCallbacks = []
     this.onDestroyedContexts = []
 
-    this.slowSpeed = 150
     this.fastSpeed = 250
-    this.speed = this.slowSpeed
     this.rotationSpeed = 40
+    this.slowSpeed = 150
+    this.speed = this.slowSpeed
     game.physics.enable(this, Phaser.Physics.P2JS)
+
+    this.remainingHealth = this.startingHealth
+    this.startingHealth = 100
   }
 
   addDestroyedCallbacks (callback, context) {
@@ -27,6 +30,15 @@ export default class Jet extends Sprite {
 
   edgeContact () {
     this.destroy()
+  }
+
+  onHit () {
+    this.removeHealth(10)
+    if (!this.remainingHealth > 0) return this.destroy()
+  }
+
+  removeHealth (amount) {
+    this.remainingHealth -= amount
   }
 
   update () {

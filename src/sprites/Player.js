@@ -1,9 +1,18 @@
+import Phaser from 'phaser'
+
 import Jet from './Jet'
 
 export default class extends Jet {
   constructor (props) {
     super(props)
     this.cursors = this.game.input.keyboard.createCursorKeys()
+
+    this.keyboard = this.game.input.keyboard
+
+    let spaceKey = this.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
+
+    spaceKey.onDown.add(this.spaceKeyDown, this)
+    spaceKey.onUp.add(this.spaceKeyUp, this)
   }
 
   update () {
@@ -17,6 +26,8 @@ export default class extends Jet {
 
     let dif = this.body.angle - angle
 
+    this.body.setZeroRotation()
+
     if ((dif < 0 && dif > -180) || (dif > 180)) {
       this.body.rotateRight(this.rotationSpeed)
     } else if ((dif > 0 && dif < 180) || (dif < -180)) {
@@ -24,5 +35,15 @@ export default class extends Jet {
     }
 
     super.update()
+  }
+
+
+  spaceKeyDown () {
+    this.speed = this.fastSpeed
+  }
+
+
+  spaceKeyUp () {
+    this.speed = this.slowSpeed
   }
 }
