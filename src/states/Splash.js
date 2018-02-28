@@ -11,7 +11,8 @@ export default class extends Phaser.State {
 
     this.load.setPreloadSprite(this.loaderBar)
 
-    this.load.image('jet', 'assets/images/jet2.png')
+    this.load.image('ship', 'assets/images/ship.png')
+    this.load.image('background', 'assets/images/background.gif')
   }
 
   create () {

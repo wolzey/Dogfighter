@@ -13,9 +13,13 @@ export default class Player extends Jet {
 
     spaceKey.onDown.add(this.spaceKeyDown, this)
     spaceKey.onUp.add(this.spaceKeyUp, this)
+    this.body.onBeginContact.add(this.onHit, this)
   }
 
   update () {
+    if (this.remainingHealth <= 0) {
+      return this.destroy()
+    }
     let mousePosX = this.game.input.activePointer.worldX
     let mousePosY = this.game.input.activePointer.worldY
     let headX = this.body.x
@@ -39,6 +43,18 @@ export default class Player extends Jet {
 
   spaceKeyDown () {
     this.speed = this.fastSpeed
+  }
+
+  onHit (phaserBody) {
+    if (phaserBody) {
+      if (phaserBody.sprite && phaserBody.sprite.key === 'ship') {
+        this.removeHealth(50)
+      }
+    }
+  }
+
+  removeHealth (amount) {
+    this.remainingHealth -= amount
   }
 
   spaceKeyUp () {

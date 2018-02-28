@@ -4,36 +4,40 @@ import Player from '../sprites/Player'
 import Enemy from '../sprites/Enemy'
 
 export default class extends Phaser.State {
-  init () { }
+  init () {
+    this.game.stage.disableVisibilityChange = true
+  }
   preload () { }
 
   create () {
+    this.game.world.setBounds(-this.game.width, -this.game.height, this.game.width * 4, this.game.height * 4)
+    let background = this.game.add.tileSprite(
+      -this.game.width,
+      -this.game.height,
+      this.game.width * 4,
+      this.game.height * 4,
+      'background'
+    )
+
+    background.tileScale.y = 0.6
+    background.tileScale.x = 0.6
+
     this.game.physics.startSystem(Phaser.Physics.P2JS)
     this.game.physics.p2.setImpactEvents(true)
-    // this.game.physics.p2.updateBoundsCollisionGroup()
-
-    const bannerText = 'Dogfighter'
-    let banner = this.add.text(this.world.centerX, this.game.height - 80, bannerText, {
-      font: '40px Bangers',
-      fill: '#77BFA3',
-      smoothed: false
-    })
-
-    banner.padding.set(10, 16)
-    banner.anchor.setTo(0.5)
+    this.game.physics.p2.updateBoundsCollisionGroup()
 
     this.player = new Player({
       game: this.game,
       x: this.world.centerX,
       y: this.world.centerY,
-      asset: 'jet'
+      asset: 'ship'
     })
 
     this.enemy = new Enemy({
       game: this.game,
       x: this.world.centerX - 80,
       y: this.world.centerY,
-      asset: 'jet'
+      asset: 'ship'
     })
 
     this.game.add.existing(this.player)
@@ -44,7 +48,9 @@ export default class extends Phaser.State {
 
   render () {
     if (__DEV__) {
-      this.game.debug.spriteInfo(this.player, 32, 32)
+      if (this.player.sprite) {
+        this.game.debug.spriteInfo(this.player, 32, 32)
+      }
     }
   }
 }
