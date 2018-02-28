@@ -39,8 +39,6 @@ if (window.cordova) {
       )
     },
 
-    // deviceready Event Handler
-    //
     onDeviceReady: function () {
       this.receivedEvent('deviceready')
 

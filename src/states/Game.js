@@ -1,13 +1,13 @@
 /* globals __DEV__ */
 import Phaser from 'phaser'
-import Mushroom from '../sprites/Mushroom'
+import Jet from '../sprites/Mushroom'
 
 export default class extends Phaser.State {
-  init() { }
-  preload() { }
+  init () { }
+  preload () { }
 
-  create() {
-    const bannerText = 'Phaser + ES6 + Webpack'
+  create () {
+    const bannerText = 'Dogfighter'
     let banner = this.add.text(this.world.centerX, this.game.height - 80, bannerText, {
       font: '40px Bangers',
       fill: '#77BFA3',
@@ -17,17 +17,17 @@ export default class extends Phaser.State {
     banner.padding.set(10, 16)
     banner.anchor.setTo(0.5)
 
-    this.mushroom = new Mushroom({
+    this.mushroom = new Jet({
       game: this.game,
       x: this.world.centerX,
       y: this.world.centerY,
-      asset: 'mushroom'
+      asset: 'jet'
     })
 
     this.game.add.existing(this.mushroom)
   }
 
-  render() {
+  render () {
     if (__DEV__) {
       this.game.debug.spriteInfo(this.mushroom, 32, 32)
     }
