@@ -22,9 +22,9 @@ export default class extends Phaser.State {
     background.tileScale.y = 0.6
     background.tileScale.x = 0.6
 
-    this.game.physics.startSystem(Phaser.Physics.P2JS)
-    this.game.physics.p2.setImpactEvents(true)
-    this.game.physics.p2.updateBoundsCollisionGroup()
+    this.game.physics.startSystem(Phaser.Physics.ARCADE)
+    // this.game.physics.p2.setImpactEvents(true)
+    // this.game.physics.p2.updateBoundsCollisionGroup()
 
     this.player = new Player({
       game: this.game,

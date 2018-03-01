@@ -9,8 +9,7 @@ export default class Jet extends Sprite {
     this.x = x
     this.y = y
 
-    // this.game.physics.arcade.enable(this)
-    this.game.physics.p2.enable(this, true)
+    this.game.physics.arcade.enable(this, true)
 
     this.anchor.setTo(0.5)
     this.onDestroyedCallbacks = []
@@ -26,18 +25,15 @@ export default class Jet extends Sprite {
     this.remainingHealth = this.startingHealth
     this.body.setCircle(25.0)
     this.scale.setTo(0.2)
-    this.body.onBeginContact.add(this.onHit, this)
+    // this.body.onBeginContact.add(this.onHit, this)
 
     this.weapon = this.game.add.weapon(30, 'bullet')
     this.weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS
     this.weapon.bulletSpeed = 600
     this.weapon.fireRate = 100
-    this.weapon.fireAngle = this.body.angle - 90
-    this.weapon.trackSprite(this, 0, 0, false)
-    this.weapon.trackRotation = false
+    this.weapon.trackSprite(this, 0, 0, true)
     this.weapon.bullets.forEach((b) => {
       b.scale.setTo(0.05)
-      this.game.physics.p2.enable(b, true)
       b.enableBody = true
     }, this)
   }
@@ -61,7 +57,8 @@ export default class Jet extends Sprite {
   }
 
   update () {
-    this.body.moveForward(this.speed)
+    // this.body.moveForward(this.speed)
+
     this.weapon.fireAngle = this.body.angle - 90
   }
 
