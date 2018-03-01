@@ -10,11 +10,14 @@ export default class Jet extends Sprite {
     this.y = y
 
     this.game.physics.arcade.enable(this, true)
+    this.body.collideWorldBounds = true
+    this.body.enable = true
+    this.body.bounce.y = 0.95
+    this.body.bounce.x = 0.95
 
     this.anchor.setTo(0.5)
     this.onDestroyedCallbacks = []
     this.onDestroyedContexts = []
-    this.debug = true
 
     this.fastSpeed = 300
     this.rotationSpeed = 40
