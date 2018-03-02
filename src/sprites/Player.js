@@ -11,8 +11,10 @@ export default class Player extends Jet {
 
     let spaceBar = this.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
     spaceBar.onDown.add(this.fireWeapon, this)
-    //let fKey = this.keyboard.addKey(Phaser.Keyboard.FKEY)
-    //fKey.onDown.add(this.toggleAssist, this)
+
+    let fKey = this.keyboard.addKey(Phaser.Keyboard.F)
+    fKey.onDown.add(this.toggleAssist, this)
+    fKey.onUp.add(() => { }, this)
 
     this.body.drag.set(70)
     this.body.maxVelocity.set(800)
@@ -41,7 +43,7 @@ export default class Player extends Jet {
   }
 
   toggleAssist () {
-    if (this.body.drag > 0) {
+    if (this.body.drag.x > 0) {
       this.body.drag.set(0)
     } else {
       this.body.drag.set(70)
