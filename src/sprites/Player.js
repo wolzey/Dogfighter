@@ -11,14 +11,18 @@ export default class Player extends Jet {
 
     let spaceBar = this.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
     spaceBar.onDown.add(this.fireWeapon, this)
+    //let fKey = this.keyboard.addKey(Phaser.Keyboard.FKEY)
+    //fKey.onDown.add(this.toggleAssist, this)
 
     this.body.drag.set(70)
-    this.body.maxVelocity.set(300)
+    this.body.maxVelocity.set(800)
   }
 
   update () {
     if (this.cursors.up.isDown) {
-      this.game.physics.arcade.accelerationFromRotation(this.rotation, 300, this.body.acceleration)
+      this.game.physics.arcade.accelerationFromRotation(this.rotation, 600, this.body.acceleration)
+    } else if (this.cursors.down.isDown) {
+      this.game.physics.arcade.accelerationFromRotation(this.rotation, -600, this.body.acceleration)
     } else {
       this.body.acceleration.set(0)
     }
@@ -34,6 +38,14 @@ export default class Player extends Jet {
 
   fireWeapon () {
     this.weapon.fire()
+  }
+
+  toggleAssist () {
+    if (this.body.drag > 0) {
+      this.body.drag.set(0)
+    } else {
+      this.body.drag.set(70)
+    }
   }
 
   wKeyDown () {

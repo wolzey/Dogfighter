@@ -14,8 +14,11 @@ export default class Jet extends Sprite {
     this.body.enable = true
     this.body.bounce.y = 0.95
     this.body.bounce.x = 0.95
+    this.body.setCircle(165,0,142)
+    //this.body.setSize(330,275,0,162)
 
-    this.anchor.setTo(0.5)
+    this.anchor.y = 0.5
+    this.anchor.x = 0.380
     this.onDestroyedCallbacks = []
     this.onDestroyedContexts = []
 
@@ -26,7 +29,7 @@ export default class Jet extends Sprite {
 
     this.startingHealth = 100
     this.remainingHealth = this.startingHealth
-    this.body.setCircle(25.0)
+    //this.body.setCircle(200)
     this.scale.setTo(0.2)
     // this.body.onBeginContact.add(this.onHit, this)
 

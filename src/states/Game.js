@@ -48,9 +48,8 @@ export default class extends Phaser.State {
 
   render () {
     if (__DEV__) {
-      if (this.player.sprite) {
-        this.game.debug.spriteInfo(this.player, 32, 32)
-      }
+      this.game.debug.body(this.player)
+      this.game.debug.spriteInfo(this.player, 32, 32)
     }
   }
 }
