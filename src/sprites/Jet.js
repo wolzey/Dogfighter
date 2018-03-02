@@ -9,13 +9,12 @@ export default class Jet extends Sprite {
     this.x = x
     this.y = y
 
-    this.game.physics.arcade.enable(this, true)
-    this.body.collideWorldBounds = true
-    this.body.enable = true
+    this.game.jetGroup.add(this)
+
     this.body.bounce.y = 0.95
     this.body.bounce.x = 0.95
-    this.body.setCircle(165,0,142)
-    //this.body.setSize(330,275,0,162)
+    this.body.setCircle(165, 0, 142)
+    this.body.collideWorldBounds = true
 
     this.anchor.y = 0.5
     this.anchor.x = 0.380
@@ -29,7 +28,6 @@ export default class Jet extends Sprite {
 
     this.startingHealth = 100
     this.remainingHealth = this.startingHealth
-    //this.body.setCircle(200)
     this.scale.setTo(0.2)
     // this.body.onBeginContact.add(this.onHit, this)
 
@@ -40,7 +38,6 @@ export default class Jet extends Sprite {
     this.weapon.trackSprite(this, 0, 0, true)
     this.weapon.bullets.forEach((b) => {
       b.scale.setTo(0.05)
-      b.enableBody = true
     }, this)
   }
 
@@ -55,6 +52,9 @@ export default class Jet extends Sprite {
 
   removeHealth (amount) {
     this.remainingHealth -= amount
+    if (this.remainingHealth <= 0) {
+      this.destroy()
+    }
   }
 
   addDestroyedCallback (callback, context) {

@@ -23,8 +23,10 @@ export default class extends Phaser.State {
     background.tileScale.x = 0.6
 
     this.game.physics.startSystem(Phaser.Physics.ARCADE)
-    // this.game.physics.p2.setImpactEvents(true)
-    // this.game.physics.p2.updateBoundsCollisionGroup()
+    this.game.jetGroup = this.game.add.group()
+    this.game.bulletGroup = this.game.add.group()
+    this.game.bulletGroup.scale.set(0.05)
+    this.game.jetGroup.enableBody = true
 
     this.player = new Player({
       game: this.game,
@@ -44,6 +46,14 @@ export default class extends Phaser.State {
     this.game.add.existing(this.enemy)
 
     this.game.camera.follow(this.player)
+  }
+
+  update () {
+    this.game.physics.arcade.collide(this.player, this.enemy)
+    this.game.physics.arcade.overlap(this.player.weapon.bullets, this.enemy, () => {}, (b1, b2) => {
+      b1.removeHealth(5)
+      b2.kill()
+    })
   }
 
   render () {
