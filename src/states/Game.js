@@ -1,4 +1,4 @@
-/* globals __DEV__ */
+// /* globals __DEV__ */
 import Phaser from 'phaser'
 
 import Floater from '../sprites/Floater'

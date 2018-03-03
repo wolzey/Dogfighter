@@ -15,7 +15,6 @@ export default class Jet extends Sprite {
     this.body.bounce.x = 0.25
     this.body.setCircle(165, 0, 142)
     this.body.collideWorldBounds = true
-
     this.anchor.y = 0.5
     this.anchor.x = 0.380
     this.onDestroyedCallbacks = []
@@ -40,6 +39,9 @@ export default class Jet extends Sprite {
     this.weapon.bullets.forEach((b) => {
       b.scale.setTo(0.05)
     }, this)
+
+    this.angle -= 90
+    console.log(this)
   }
 
   addDestroyedCallback (callback, context) {

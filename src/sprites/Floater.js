@@ -1,5 +1,21 @@
 import { Sprite } from 'phaser'
 
+let isNegative = () => {
+  let num = Math.random() * 1
+  if (num > 0.5) return true
+  return 0
+}
+
+let chooseRandom = (range) => {
+  return Math.floor(Math.random() * range)
+}
+
+let randomNumber = (num) => {
+  return {
+    x: isNegative() ? -chooseRandom(num) : chooseRandom(num),
+    y: isNegative() ? -chooseRandom(num) : chooseRandom(num)
+  }
+}
 export default class Floater extends Sprite {
   constructor ({ game, x, y, asset }) {
     super(game, x, y, asset)
@@ -14,13 +30,13 @@ export default class Floater extends Sprite {
     this.body.setCircle(30)
     this.body.speed = 20
     this.body.rotation = Math.random() * 360
-    this.body.angularAcceleration = Math.floor(Math.random() * 10)
+    this.body.angularAcceleration = Math.floor(Math.random() * 2)
 
     this.body.collideWorldBounds = true
     this.anchor.setTo(0.5)
 
     this.remainingHealth = 20
-    this.body.mass = 10
+    this.body.mass = 5
   }
 
   removeHealth (damage) {
@@ -28,5 +44,5 @@ export default class Floater extends Sprite {
     if (this.remainingHealth <= 0) return this.destroy()
   }
 
-  update () { }
+  update () {}
 }
